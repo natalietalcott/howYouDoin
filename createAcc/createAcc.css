@@ -29,3 +29,13 @@ section {
 	height: 75%;
 	text-align: center;
 }
+
+form {
+	width: 97%;
+	clear: both;
+}
+
+form input {
+	width: 100%;
+	clear: both;
+}
