@@ -1,0 +1,46 @@
+
+html{
+	height: 100%
+}
+
+body{
+	background-image: url(../images/howudoin.gif);
+	height: 100%
+}
+
+header {
+	margin: auto;
+	width: 50%;
+	text-align: center;
+	color: white;
+}
+
+#email, #password {
+	padding: 5px;
+	
+}
+
+#forget {
+	color: blue;
+	text-decoration: underline;
+}
+
+section {
+	background-color: white;
+	border: 2px black solid;
+	padding : 10px;
+	margin: auto;
+	width: 25%;
+	height: 75%;
+	text-align: center;
+}
+
+form {
+	width: 97%;
+	clear: both;
+}
+
+form input {
+	width: 100%;
+	clear: both;
+}
