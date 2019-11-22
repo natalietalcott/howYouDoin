@@ -13,13 +13,22 @@
     include ('database_connection.php');
 ?>
 <?php
-    //$query = file_get_contents('databaseCreation.sql');
-    //$sql = mysqli_query($conn, $query);
-    //if ($conn->query($query) === TRUE) {
-    //    echo "Table created successfully!";
-    //} else {
-    //    echo "Error creating SQL table: " . $conn->error;
-    //}
+    $query = file_get_contents('databaseCreation.sql');
+
+    if (mysqli_multi_query($conn, $query)) {
+        // echo "Table created successfully!";
+        do {
+            /* store first result set */
+            if ($result = mysqli_store_result($conn)) {
+                while ($row = mysqli_fetch_row($result)) {
+                }
+                mysqli_free_result($result); // Free in order to store the next
+            }
+        } while (mysqli_next_result($conn));
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    mysqli_next_result($conn);
 ?>
 <body id="body">
     <nav>
