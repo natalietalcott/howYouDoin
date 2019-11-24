@@ -78,43 +78,7 @@
         $calendar = new Calendar($logList);
 
         echo $calendar->show();
-
-        // foreach ($logList as $log) {
-        //     echo "LOGS";
-        //     if ($log["note"] !== '') {
-        //         $elem = $domDoc->getElementById($log["date"]);
-        //         $elem->innerHTML = $elem->innerHTML . '<p>~</p>';
-        //     }
-        //     if ($log["emotion"] !== '') {
-        //         echo"date:".$log["date"];
-        //         $elem = $domDoc->getElementById($log["date"]);
-        //         $elem->setAttribute('class', $log["emotion"]);
-        //     }
-        // }
-
-        // // print document (with changes)
-        // echo $domDoc->saveXML();
         ?>
-        <!-- <div style="display: flex;">
-            <div class="calendar" id="november">
-                <p class="month_name">
-                    November
-                </p>
-                <div class="month" id="december"></div>
-                <p class="month_name">
-                    December
-                </p>
-                <div class="month" id="january"></div>
-                <p class="month_name">
-                    January
-                </p>
-                <div class="month" id="february"></div>
-                <p class="month_name">
-                    February
-                </p>
-                <div class="month"></div>
-            </div>
-        </div> -->
     </article>
 
 </body>
