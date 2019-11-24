@@ -56,13 +56,14 @@ mysqli_next_result($conn);
             <p>SUBMIT</p>
         </div>
     </div>
-    <?php
-    $calendar = new Calendar();
 
-    echo $calendar->show();
-    ?>
-    <!-- <article>
-        <div style="display: flex;">
+    <article>
+        <?php
+        $calendar = new Calendar();
+
+        echo $calendar->show();
+        ?>
+        <!-- <div style="display: flex;">
             <div class="calendar" id="november">
                 <p class="month_name">
                     November
@@ -81,8 +82,8 @@ mysqli_next_result($conn);
                 </p>
                 <div class="month"></div>
             </div>
-        </div>
-    </article> -->
+        </div> -->
+    </article>
 
 </body>
 
