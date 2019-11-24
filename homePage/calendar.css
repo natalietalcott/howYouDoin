@@ -146,4 +146,8 @@ div#calendar ul.dates li.super-happy {
   background-color: var(--super-happy);
 }
 
+div#calendar ul.dates li.mask {
+    background-color: var(--background);
+  }
+
 
