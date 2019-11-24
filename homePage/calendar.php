@@ -1,13 +1,15 @@
 <?php
 class Calendar
 {
-
+    
     /**
      * Constructor
      */
-    public function __construct()
+    public function __construct($list)
     {
         $this->naviHref = htmlentities($_SERVER['PHP_SELF']);
+        $this->logList = $list;
+        // print_r($this->logList);
     }
 
     /********************* PROPERTY ********************/
@@ -24,6 +26,9 @@ class Calendar
     private $daysInMonth = 0;
 
     private $naviHref = null;
+
+    private $logList = array();
+
 
     /********************* PUBLIC **********************/
 
@@ -118,7 +123,11 @@ class Calendar
             $cellContent = null;
         }
 
-
+        $key = array_search($this->currentDate, array_column($this->logList, 'date'));
+        if($key != ""){
+            echo"key:".$key." date:".$this->currentDate.PHP_EOL;
+        }
+        
         return '<li id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
         //"li-'
     }

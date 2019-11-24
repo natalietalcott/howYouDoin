@@ -58,28 +58,15 @@
 
     <article>
         <?php
-        $calendar = new Calendar();
-
-        echo $calendar->show();
-
         //TOOD: this will be set earlier
         $email = "gabbybmeow@gmail.com";
-        
 
-        // // create the DOMDocument object
-        // $domDoc = new DOMDocument();
-        // libxml_use_internal_errors(true);
-        // // load content from HTML file
-        // $domDoc->loadHTMLFile(file_get_contents('http://localhost/howYouDoin/homePage/homePage.php'));
-        // libxml_use_internal_errors(true);
-        // if ($domDoc->validate()) {
-        //     echo "This document is valid!\n";
-        // }
+
         //get all the calendar dates for this user
         $logList = array();
-        $query = "SELECT * FROM daily_log";// WHERE email = ?";
+        $query = "SELECT * FROM daily_log WHERE email = ?";
         $stmt = $conn->prepare($query);
-        // $stmt->bind_param("s", $email);
+        $stmt->bind_param("s", $email);
 
         if ($stmt->execute()) {
             $result = $stmt->get_result();
@@ -88,7 +75,9 @@
             }
             $stmt->close();
         }
-        echo "list is:".sizeof($logList);
+        $calendar = new Calendar($logList);
+
+        echo $calendar->show();
 
         // foreach ($logList as $log) {
         //     echo "LOGS";
