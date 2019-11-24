@@ -1,46 +1,78 @@
-
-html{
-	height: 100%
+:root {
+  --super-sad: #ad2e95;
+  --sad: #b39bc8;
+  /* --neutral: #f0ebf4; */
+  --neutral: #d287b5;
+  --happy: #f172a1;
+  --super-happy: #e64398;
+  --background: #a1c3d1;
+  --top-text: #fff;
+  --tile-color: #bbd3dd;
 }
 
-body{
-	background-image: url(../images/howudoin.gif);
-	height: 100%
+html {
+  height: 100%;
+}
+
+body {
+  background-image: url(../images/howudoin.gif);
+  height: 100%;
+  color: var(--top-text);
+  font-family: Helvetica, "Times New Roman", Times, serif;
 }
 
 header {
-	margin: auto;
-	width: 50%;
-	text-align: center;
-	color: white;
+  margin: auto;
+  /* width: 50%; */
+  text-align: center;
 }
 
-#email, #password {
-	padding: 5px;
-	
+#email,
+#password {
+  padding: 5px;
 }
 
 #forget {
-	color: blue;
-	text-decoration: underline;
+  color: blue;
+  text-decoration: underline;
 }
 
 section {
-	background-color: white;
-	border: 2px black solid;
-	padding : 10px;
-	margin: auto;
-	width: 25%;
-	height: 75%;
-	text-align: center;
+  background-color: var(--background);
+  /* background-color: rgba(255, 255, 255, 0.0); */
+  border: 2px var(--sad) solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin: auto;
+  width: 25%;
+  height: 75%;
+  text-align: center;
 }
 
+#formWrap {
+  display: block;
+  text-align: center;
+}
 form {
-	width: 97%;
-	clear: both;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  clear: both;
 }
 
 form input {
-	width: 100%;
-	clear: both;
+  width: 100%;
+  clear: both;
+  box-sizing: border-box;
+
+  padding: 11px 10px 11px 13px;
+  display: block;
+  margin: 0;
+  border: none;
+}
+
+#email_label,
+#pass_label {
+  display: none;
 }
