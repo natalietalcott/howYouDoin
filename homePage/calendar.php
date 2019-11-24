@@ -130,7 +130,6 @@ class Calendar
             if ($newNote != '') {
                 return '<li class="' . $newClass . ' tagged" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '<p>~</p></li>';
             } else {
-                echo "date:" . $this->currentDate ."emotion:".$this->logList[$key]["emotion"]. PHP_EOL;
                 return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
             }
         } else {
