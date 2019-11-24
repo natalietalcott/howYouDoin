@@ -4,32 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="homePage.css" />
+    <link href="calendar.css" type="text/css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>How You Doin'?</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="homePage.js"></script>
 </head>
 <?php
-    include ('database_connection.php');
+include('database_connection.php');
+include 'calendar.php';
 ?>
 <?php
-    $query = file_get_contents('databaseCreation.sql');
+$query = file_get_contents('databaseCreation.sql');
 
-    if (mysqli_multi_query($conn, $query)) {
-        // echo "Table created successfully!";
-        do {
-            /* store first result set */
-            if ($result = mysqli_store_result($conn)) {
-                while ($row = mysqli_fetch_row($result)) {
-                }
-                mysqli_free_result($result); // Free in order to store the next
-            }
-        } while (mysqli_next_result($conn));
-    } else {
-        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }
-    mysqli_next_result($conn);
+if (mysqli_multi_query($conn, $query)) {
+    // echo "Table created successfully!";
+    do {
+        /* store first result set */
+        if ($result = mysqli_store_result($conn)) {
+            while ($row = mysqli_fetch_row($result)) { }
+            mysqli_free_result($result); // Free in order to store the next
+        }
+    } while (mysqli_next_result($conn));
+} else {
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+}
+mysqli_next_result($conn);
 ?>
+
 <body id="body">
     <nav>
         <div class="navbar">
@@ -54,7 +56,12 @@
             <p>SUBMIT</p>
         </div>
     </div>
-    <article>
+    <?php
+    $calendar = new Calendar();
+
+    echo $calendar->show();
+    ?>
+    <!-- <article>
         <div style="display: flex;">
             <div class="calendar" id="november">
                 <p class="month_name">
@@ -75,7 +82,7 @@
                 <div class="month"></div>
             </div>
         </div>
-    </article>
+    </article> -->
 
 </body>
 
