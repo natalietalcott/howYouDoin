@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="homePage.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-5.11.2-web/css/all.css">
     <title>How You Doin'?</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="homePage.js"></script>
@@ -30,10 +30,14 @@
     }
     mysqli_next_result($conn);
 ?>
+<?php
+    // define variables and set to empty values
+    $email= $selected_emotion = $note= $date= "";
+?>
 <body id="body">
     <nav>
         <div class="navbar">
-            <a class="log" id="log" href="#"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+            <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
             <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
         </div>
     </nav>
@@ -45,13 +49,70 @@
     <div id="log_sidebar" class="sidebar">
         <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
         <p class="daily_log">DAILY LOG</p>
-        <p id="emotion">EMOTION</p>
-        <p id="emoticon">EMOTICON</p>
-        <p id="note">NOTE</p>
-        <textarea rows="4" cols="50"></textarea>
-        <p id="tag">TAG</p>
-        <div class="submit_btn">
-            <p>SUBMIT</p>
+        <div class="sidebar_contents">
+        <?php
+            if(isset($_POST['logSubmit']))
+            {
+                //echo ($_POST["email"]);
+                //echo ($_POST["date"]);
+                //echo ($_POST["emotion"]);
+                echo ($_POST["note"]);
+                
+                /*
+                $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note) VALUES ('".$_POST["email"]."','".$_POST["date"]."','".$_POST["selectedEmotion"]."','".$_POST["note"]."')";
+                if (mysqli_query($conn, $newLog)) {
+                    echo "New log created successfully";
+                    } else {
+                        echo "Failed";
+                    }
+                    */
+            }
+        ?>
+                <p id="emotion">EMOTION</p>
+                <div class="emoticons">
+                    <?php 
+                            if($selected_emotion == "super_sad"){
+                                echo "<i id='super_sad_selected' class='fas fa-sad-tear fa-2x'></i>";
+                            } else {
+                                echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
+                            }
+                        ?>
+                    <?php 
+                            if($selected_emotion == "sad"){
+                                echo "<i id='sad_selected' class='fas fa-frown fa-2x'></i>";
+                            } else {
+                                echo "<i id='sad' class='far fa-frown fa-2x'></i>";
+                            }
+                        ?>
+                    <?php 
+                            if($selected_emotion == "neutral"){
+                                echo "<i id='neutral_selected' class='fas fa-meh fa-2x'></i>";
+                            } else {
+                                echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
+                            }
+                        ?>
+                    <?php 
+                            if($selected_emotion == "happy"){
+                                echo "<i id='happy_selected' class='fas fa-smile fa-2x'></i>";
+                            } else {
+                                echo "<i id='happy' class='far fa-smile fa-2x'></i>";
+                            }
+                        ?>
+                    <?php 
+                            if($selected_emotion == "super_happy"){
+                                echo "<i id='super_happy_selected' class='fas fa-grin fa-2x'></i>";
+                            } else {
+                                echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
+                            }
+                    ?>
+                </div>
+            <form action="./homePage.php" method="post">
+                <input type="hidden" name="emoticon" value="<?php echo $selected_emotion;?>"><br>
+                <p id="note">NOTE</p>
+                <input type="text" name="note" value="<?php echo $note;?>"><br>
+                <p id="tag">TAG</p>
+                <input type="submit" value="Submit" name="logSubmit">
+            </form>
         </div>
     </div>
     <article>

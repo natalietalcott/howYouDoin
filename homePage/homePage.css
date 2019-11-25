@@ -1,103 +1,170 @@
+:root {
+  --super-sad: #ad2e95;
+  --sad: #b39bc8;
+  --neutral: #f0ebf4;
+  --happy: #f172a1;
+  --super-happy: #e64398;
+  --background: #a1c3d1;
+  --tile-color: #bbd3dd;
+}
+
 body {
-    font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
+  background-color: var(--background);
 }
 
 .navbar {
-    width: 100%;
-    overflow: auto;
+  width: 100%;
+  overflow: auto;
 }
 
 .log {
-    float: left;
+  float: left;
 }
 
 .filter {
-    float: right;
+  float: right;
 }
 
 .title {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .calendar {
-    flex: 80%;
-    height: 500px;
-    background-color: white;
-    padding: 10px;
-    transition: margin-left .5s;
-    padding: 16px;
+  flex: 80%;
+  height: 500px;
+  background-color: var(--background);
+  padding: 10px;
+  transition: margin-left 0.5s;
+  padding: 16px;
 }
 
 .month_name {
-    text-align: left;
-    font-size: 20px;
-    font-weight: bold
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .month {
-    background-color: lightgray;
-    flex: 100%;
-    height: 100px;
-    border-radius: 5px;
-    padding: 5px;
+  background-color: lightgray;
+  flex: 100%;
+  height: 100px;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    background-color: black;
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 30px;
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: var(--tile-color);
+  overflow-x: hidden;
+  transition: 0.5s;
 }
 
 .sidebar .closebtn {
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
 }
 
 .sidebar a {
-    padding: 8px 8px 8px 32px;
-    text-decoration: none;
-    font-size: 25px;
-    color: #818181;
-    display: block;
-    transition: 0.3s;
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
 }
 
 .sidebar a:hover {
-    color: #f1f1f1;
+  color: #f1f1f1;
 }
 
 .sidebar .daily_log {
-    color: white;
-    font-size: 25px;
-    text-align: center;
-    transition: 0.3s;
+  color: white;
+  font-size: 25px;
+  text-align: center;
+  transition: 0.3s;
 }
 
 .sidebar p {
-    padding-left: 10px;
-    color: white;
-    font-size: 16px;
-    text-align: left;
-    transition: 0.3s;
+  color: white;
+  font-size: 16px;
+  text-align: left;
+  transition: 0.3s;
 }
 
 .sidebar .submit_btn {
-    background-color: blue;
-    border-style: solid;
-    border-radius: 5px;
-    border-width: 2px;
-    border-color: yellow;
+  background-color: var(--super-happy);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 2px;
+  border-color: yellow;
 }
+
+.sidebar .sidebar_contents {
+  padding: 5%;
+}
+
+#happy {
+  color: var(--happy);
+}
+
+#super_happy {
+  color: var(--super-happy);
+}
+
+#super_happy_selected {
+  color: var(--super-happy);
+}
+
+#neutral {
+  color: var(--neutral);
+}
+
+#neutral_selected {
+  color: var(--neutral);
+}
+
+#sad {
+  color: var(--sad);
+}
+
+#sad_selected {
+  color: var(--sad);
+}
+
+#super_sad {
+  color: var(--super-sad);
+}
+
+#super_sad_selected {
+  color: var(--super-sad);
+}
+
+.sidebar .emoticons {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+/*
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+}
+*/
