@@ -32,29 +32,29 @@
     }
     mysqli_next_result($conn);
 ?>
-<?php
+    <?php
     // define variables and set to empty values
     $email = "Madelinemck@live.com";
     $selected_emotion = $note= $date= $tag = "";
 ?>
 
-<body id="body">
-    <nav>
-        <div class="navbar">
-            <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
-            <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
-        </div>
-    </nav>
-    <header>
-        <div class="title">
-            <h1>How You Doin'?</h1>
-        </div>
-    </header>
-    <div id="log_sidebar" class="sidebar">
-        <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
-        <p class="daily_log">DAILY LOG</p>
-        <div class="sidebar_contents">
-            <?php
+    <body id="body">
+        <nav>
+            <div class="navbar">
+                <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
+                <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
+            </div>
+        </nav>
+        <header>
+            <div class="title">
+                <h1>How You Doin'?</h1>
+            </div>
+        </header>
+        <div id="log_sidebar" class="sidebar">
+            <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
+            <p class="daily_log">DAILY LOG</p>
+            <div class="sidebar_contents">
+                <?php
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (isset($_POST['note'])){
                     $note = ($_POST['note']);
@@ -78,45 +78,82 @@
                 }
             }
         ?>
-            <p id="emotion">EMOTION</p>
-            <div class="emoticons">
-                <?php
+                <p id="emotion">EMOTION</p>
+                <div class="emoticons">
+                    <?php
                     echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
                     echo "<i id='sad' class='far fa-frown fa-2x'></i>";
                     echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
                     echo "<i id='happy' class='far fa-smile fa-2x'></i>";
                     echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
                 ?>
-            </div>
-            <form method="POST" action="homePage.php">
-                <div class="radio_emotions">
-                    <input type="radio" name="Emoticon" value="superSad" />
-                    <input type="radio" name="Emoticon" value="sad" />
-                    <input type="radio" name="Emoticon" value="neutral" />
-                    <input type="radio" name="Emoticon" value="happy" />
-                    <input type="radio" name="Emoticon" value="superHappy" />
                 </div>
-                <p id="note">NOTE</p>
-                <textarea rows="5" type="text" name="note" class="input_note"
-                    value="<?php echo $note;?>"></textarea><br>
-                <p id="tag">TAG</p>
-                <select name="daily_tag">
-                    <option value="weather">Weather</option>
-                    <option value="friends">Friends</option>
-                    <option value="family">Family</option>
-                    <option value="school">School</option>
-                    <option value="work">Work</option>
-                    <option value="drama">Drama</option>
-                    <option value="relationship">Relationship</option>
-                </select><br><br>
-                <input type="submit" name="submit"/>
-            </form>
+                <form method="POST" action="homePage.php">
+                    <div class="radio_emotions">
+                        <input type="radio" name="Emoticon" value="superSad" />
+                        <input type="radio" name="Emoticon" value="sad" />
+                        <input type="radio" name="Emoticon" value="neutral" />
+                        <input type="radio" name="Emoticon" value="happy" />
+                        <input type="radio" name="Emoticon" value="superHappy" />
+                    </div>
+                    <p id="note">NOTE</p>
+                    <textarea rows="5" type="text" name="note" class="input_note"
+                        value="<?php echo $note;?>"></textarea><br>
+                    <p id="tag">TAG</p>
+                    <select name="daily_tag">
+                        <option value="weather">Weather</option>
+                        <option value="friends">Friends</option>
+                        <option value="family">Family</option>
+                        <option value="school">School</option>
+                        <option value="work">Work</option>
+                        <option value="drama">Drama</option>
+                        <option value="relationship">Relationship</option>
+                    </select><br><br>
+                    <input type="submit" name="submit" />
+                </form>
 
+            </div>
         </div>
-    </div>
 
-    <article>
-        <?php
+        <div id="filter_sidebar" class="filter_sidebar">
+            <a href="javascript:void(0)" id="fclosebtn" class="fclosebtn">&times;</a>
+            <p class="filter_log">FILTER LOGS</p>
+            <div class="sidebar_contents">
+                <p id="emotion">EMOTION</p>
+                <div class="emoticons">
+                    <?php
+                    echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
+                    echo "<i id='sad' class='far fa-frown fa-2x'></i>";
+                    echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
+                    echo "<i id='happy' class='far fa-smile fa-2x'></i>";
+                    echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
+                ?>
+                </div>
+                <form method="POST" action="homePage.php">
+                    <div class="radio_emotions">
+                        <input type="radio" name="Emoticon" value="superSad" />
+                        <input type="radio" name="Emoticon" value="sad" />
+                        <input type="radio" name="Emoticon" value="neutral" />
+                        <input type="radio" name="Emoticon" value="happy" />
+                        <input type="radio" name="Emoticon" value="superHappy" />
+                    </div>
+                    <p id="tag">TAG</p>
+                    <select name="daily_tag">
+                        <option value="weather">Weather</option>
+                        <option value="friends">Friends</option>
+                        <option value="family">Family</option>
+                        <option value="school">School</option>
+                        <option value="work">Work</option>
+                        <option value="drama">Drama</option>
+                        <option value="relationship">Relationship</option>
+                    </select><br><br>
+                    <input type="submit" name="Filter" value="Filter" />
+                </form>
+            </div>
+        </div>
+
+        <article>
+            <?php
         $email = "Madelinemck@live.com";
 
         //get all the calendar dates for this user
@@ -138,8 +175,8 @@
         echo $calendar->show();
         
         ?>
-    </article>
+        </article>
 
-</body>
+    </body>
 
 </html>
