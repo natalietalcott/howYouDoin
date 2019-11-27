@@ -71,9 +71,9 @@
                 if (isset($_POST['submit'])){
                     $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note,tag)VALUES ('".$email."','".$date."','".$selected_emotion."','".$note."','".$tag."')";
                     if (mysqli_query($conn, $newLog)) {
-                        echo "New user created successfully";
+                       
                      } else {
-                         echo "Failed";
+                         
                      }
                 }
             }
@@ -117,26 +117,26 @@
 
     <article>
         <?php
-        //TOOD: this will be set earlier
-        $email = "gabbybmeow@gmail.com";
-
+        $email = "Madelinemck@live.com";
 
         //get all the calendar dates for this user
         $logList = array();
-        $query = "SELECT * FROM daily_log WHERE email = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $email);
+        $query = "SELECT * FROM DAILY_LOG WHERE (email='$email')";
 
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        $result = mysqli_query($conn, $query);   
+        //$rowcount=$result->fetch_row();
+        
+        if($result)
+        {
             while ($row = $result->fetch_array()) {
                 array_push($logList, $row);
             }
-            $stmt->close();
+            mysqli_close($conn);
         }
         $calendar = new Calendar($logList);
 
         echo $calendar->show();
+        
         ?>
     </article>
 
