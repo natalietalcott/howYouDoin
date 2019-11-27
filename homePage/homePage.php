@@ -115,6 +115,11 @@
         </div>
     </div>
 
+    <div id="filter_sidebar" class="filter_sidebar">
+        <a href="javascript:void(0)" id="fclosebtn" class="fclosebtn">&times;</a>
+        <p class="filter_log">FILTER LOGS</p>
+    </div>
+
     <article>
         <?php
         $email = "Madelinemck@live.com";
