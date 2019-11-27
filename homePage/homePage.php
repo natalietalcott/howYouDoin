@@ -31,12 +31,12 @@
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     mysqli_next_result($conn);
-?>
+    ?>
     <?php
     // define variables and set to empty values
     $email = "gabs@lice.com";
-    $selected_emotion = $note= $date= $tag = "";
-?>
+    $selected_emotion = $note = $date = $tag = "";
+    ?>
 
     <body id="body">
         <nav>
@@ -55,29 +55,35 @@
             <p class="daily_log">DAILY LOG</p>
             <div class="sidebar_contents">
                 <?php
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                if (isset($_POST['note'])){
-                    $note = ($_POST['note']);
+                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                    if (isset($_POST['note'])) {
+                        $note = ($_POST['note']);
+                    }
+                    if (isset($_POST['daily_tag'])) {
+                        $tag = ($_POST['daily_tag']);
+                    }
+                    if (isset($_POST['Emoticon'])) {
+                        $selected_emotion = $_POST['Emoticon'];
+                        //echo($selected_emotion);
+                    }
+                    $date = date("Y-m-d");
+                    //echo($date);
+                    if (isset($_POST['submit'])) {
+                        $query = "INSERT INTO daily_log(email, date, emotion, note, tag)VALUES(?, ?, ?, ?, ?)";
+                        $stmt = $conn->prepare($query);
+                        $stmt->bind_param("sssss", $email, $date, $selected_emotion, $note, $tag);
+                        if ($stmt->execute()) {
+                            echo "New records created successfully";
+                        }
+                        else {
+                            echo $stmt -> error;
+                        }
+                        $stmt->close();
+                        // $newLog = "INSERT INTO daily_log(email, date, emotion, note,tag)VALUES ('" . $email . "','" . $date . "','" . $selected_emotion . "','" . $note . "','" . $tag . "')";
+                        // if (mysqli_query($conn, $newLog)) { echo"jdhflkdjhfa";} else {echo"bad"; }
+                    }
                 }
-                if (isset($_POST['daily_tag'])){
-                    $tag = ($_POST['daily_tag']);
-                }
-                if (isset($_POST['Emoticon'])) {
-                    $selected_emotion = $_POST['Emoticon'];
-                    //echo($selected_emotion);
-                }
-                $date = date("m-d-Y");
-                //echo($date);
-                if (isset($_POST['submit'])){
-                    $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note,tag)VALUES ('".$email."','".$date."','".$selected_emotion."','".$note."','".$tag."')";
-                    if (mysqli_query($conn, $newLog)) {
-                       
-                     } else {
-                         
-                     }
-                }
-            }
-        ?>
+                ?>
                 <p id="emotion">EMOTION</p>
                 <div class="emoticons">
                     <?php
@@ -86,19 +92,18 @@
                     echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
                     echo "<i id='happy' class='far fa-smile fa-2x'></i>";
                     echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                ?>
+                    ?>
                 </div>
                 <form method="POST" action="homePage.php">
                     <div class="radio_emotions">
-                        <input type="radio" name="Emoticon" value="superSad" />
+                        <input type="radio" name="Emoticon" value="super-sad" />
                         <input type="radio" name="Emoticon" value="sad" />
                         <input type="radio" name="Emoticon" value="neutral" />
                         <input type="radio" name="Emoticon" value="happy" />
-                        <input type="radio" name="Emoticon" value="superHappy" />
+                        <input type="radio" name="Emoticon" value="super-happy" />
                     </div>
                     <p id="note">NOTE</p>
-                    <textarea rows="5" type="text" name="note" class="input_note"
-                        value="<?php echo $note;?>"></textarea><br>
+                    <textarea rows="5" type="text" name="note" class="input_note" value="<?php echo $note; ?>"></textarea><br>
                     <p id="tag">TAG</p>
                     <select name="daily_tag">
                         <option value="weather">Weather</option>
@@ -127,7 +132,7 @@
                     echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
                     echo "<i id='happy' class='far fa-smile fa-2x'></i>";
                     echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                ?>
+                    ?>
                 </div>
                 <form method="POST" action="homePage.php">
                     <div class="radio_emotions">
@@ -154,27 +159,40 @@
 
         <article>
             <?php
-        $email = "gabs@lice.com";
+            // $email = "gabbybmeow@gmail.com";
 
-        //get all the calendar dates for this user
-        $logList = array();
-        $query = "SELECT * FROM DAILY_LOG WHERE (email='$email')";
-
-        $result = mysqli_query($conn, $query);   
-        //$rowcount=$result->fetch_row();
-        
-        if($result)
-        {
-            while ($row = $result->fetch_array()) {
-                array_push($logList, $row);
+            //get all the calendar dates for this user
+            $logList = array();
+            echo "email:".$email;
+            $query = "SELECT * FROM daily_log WHERE email = ?";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("s", $email);
+            if ($stmt->execute()) {
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_array()) {
+                    array_push($logList, $row);
+                }
+                $stmt->close();
             }
-            mysqli_close($conn);
-        }
-        $calendar = new Calendar($logList);
+            else {
+                echo $stmt -> error;
+            }
+            // $query = "SELECT * FROM DAILY_LOG WHERE (email='$email')";
 
-        echo $calendar->show();
-        
-        ?>
+            // $result = mysqli_query($conn, $query);
+            // //$rowcount=$result->fetch_row();
+
+            // if ($result) {
+            //     while ($row = $result->fetch_array()) {
+            //         array_push($logList, $row);
+            //     }
+            //     mysqli_close($conn);
+            // }
+            $calendar = new Calendar($logList);
+
+            echo $calendar->show();
+
+            ?>
         </article>
 
     </body>
