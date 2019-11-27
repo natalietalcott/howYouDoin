@@ -32,8 +32,10 @@
 ?>
 <?php
     // define variables and set to empty values
-    $email= $selected_emotion = $note= $date= "";
+    $email = "Madelinemck@live.com";
+    $selected_emotion = $note= $date= $tag = "";
 ?>
+
 <body id="body">
     <nav>
         <div class="navbar">
@@ -50,69 +52,64 @@
         <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
         <p class="daily_log">DAILY LOG</p>
         <div class="sidebar_contents">
-        <?php
-            if(isset($_POST['logSubmit']))
-            {
-                //echo ($_POST["email"]);
-                //echo ($_POST["date"]);
-                //echo ($_POST["emotion"]);
-                echo ($_POST["note"]);
-                
-                /*
-                $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note) VALUES ('".$_POST["email"]."','".$_POST["date"]."','".$_POST["selectedEmotion"]."','".$_POST["note"]."')";
-                if (mysqli_query($conn, $newLog)) {
-                    echo "New log created successfully";
-                    } else {
-                        echo "Failed";
-                    }
-                    */
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['note'])){
+                    $note = ($_POST['note']);
+                }
+                if (isset($_POST['daily_tag'])){
+                    $tag = ($_POST['daily_tag']);
+                }
+                if (isset($_POST['Emoticon'])) {
+                    $selected_emotion = $_POST['Emoticon'];
+                    //echo($selected_emotion);
+                }
+                $date = date("m-d-Y");
+                //echo($date);
+                if (isset($_POST['submit'])){
+                    $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note,tag)VALUES ('".$email."','".$date."','".$selected_emotion."','".$note."','".$tag."')";
+                    if (mysqli_query($conn, $newLog)) {
+                        echo "New user created successfully";
+                     } else {
+                         echo "Failed";
+                     }
+                }
             }
         ?>
-                <p id="emotion">EMOTION</p>
-                <div class="emoticons">
-                    <?php 
-                            if($selected_emotion == "super_sad"){
-                                echo "<i id='super_sad_selected' class='fas fa-sad-tear fa-2x'></i>";
-                            } else {
-                                echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
-                            }
-                        ?>
-                    <?php 
-                            if($selected_emotion == "sad"){
-                                echo "<i id='sad_selected' class='fas fa-frown fa-2x'></i>";
-                            } else {
-                                echo "<i id='sad' class='far fa-frown fa-2x'></i>";
-                            }
-                        ?>
-                    <?php 
-                            if($selected_emotion == "neutral"){
-                                echo "<i id='neutral_selected' class='fas fa-meh fa-2x'></i>";
-                            } else {
-                                echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
-                            }
-                        ?>
-                    <?php 
-                            if($selected_emotion == "happy"){
-                                echo "<i id='happy_selected' class='fas fa-smile fa-2x'></i>";
-                            } else {
-                                echo "<i id='happy' class='far fa-smile fa-2x'></i>";
-                            }
-                        ?>
-                    <?php 
-                            if($selected_emotion == "super_happy"){
-                                echo "<i id='super_happy_selected' class='fas fa-grin fa-2x'></i>";
-                            } else {
-                                echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                            }
-                    ?>
+            <p id="emotion">EMOTION</p>
+            <div class="emoticons">
+                <?php
+                    echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
+                    echo "<i id='sad' class='far fa-frown fa-2x'></i>";
+                    echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
+                    echo "<i id='happy' class='far fa-smile fa-2x'></i>";
+                    echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
+                ?>
+            </div>
+            <form method="POST" action="homePage.php">
+                <div class="radio_emotions">
+                    <input type="radio" name="Emoticon" value="superSad" />
+                    <input type="radio" name="Emoticon" value="sad" />
+                    <input type="radio" name="Emoticon" value="neutral" />
+                    <input type="radio" name="Emoticon" value="happy" />
+                    <input type="radio" name="Emoticon" value="superHappy" />
                 </div>
-            <form action="./homePage.php" method="post">
-                <input type="hidden" name="emoticon" value="<?php echo $selected_emotion;?>"><br>
                 <p id="note">NOTE</p>
-                <input type="text" name="note" value="<?php echo $note;?>"><br>
+                <textarea rows="5" type="text" name="note" class="input_note"
+                    value="<?php echo $note;?>"></textarea><br>
                 <p id="tag">TAG</p>
-                <input type="submit" value="Submit" name="logSubmit">
+                <select name="daily_tag">
+                    <option value="weather">Weather</option>
+                    <option value="friends">Friends</option>
+                    <option value="family">Family</option>
+                    <option value="school">School</option>
+                    <option value="work">Work</option>
+                    <option value="drama">Drama</option>
+                    <option value="relationship">Relationship</option>
+                </select><br><br>
+                <input type="submit" name="submit"/>
             </form>
+
         </div>
     </div>
     <article>
