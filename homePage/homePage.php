@@ -2,17 +2,20 @@
 <html>
 
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="homePage.css" />
     <link rel="stylesheet" href="../fontawesome-free-5.11.2-web/css/all.css">
+    <link href="calendar.css" type="text/css" rel="stylesheet" />
     <title>How You Doin'?</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="homePage.js"></script>
 </head>
-<?php
-    include ('database_connection.php');
-?>
-<?php
+
+
+<body id="body">
+    <?php
+    include('database_connection.php');
+    include 'calendar.php';
     $query = file_get_contents('databaseCreation.sql');
 
     if (mysqli_multi_query($conn, $query)) {
@@ -20,8 +23,7 @@
         do {
             /* store first result set */
             if ($result = mysqli_store_result($conn)) {
-                while ($row = mysqli_fetch_row($result)) {
-                }
+                while ($row = mysqli_fetch_row($result)) { }
                 mysqli_free_result($result); // Free in order to store the next
             }
         } while (mysqli_next_result($conn));
@@ -112,27 +114,30 @@
 
         </div>
     </div>
+
     <article>
-        <div style="display: flex;">
-            <div class="calendar" id="november">
-                <p class="month_name">
-                    November
-                </p>
-                <div class="month" id="december"></div>
-                <p class="month_name">
-                    December
-                </p>
-                <div class="month" id="january"></div>
-                <p class="month_name">
-                    January
-                </p>
-                <div class="month" id="february"></div>
-                <p class="month_name">
-                    February
-                </p>
-                <div class="month"></div>
-            </div>
-        </div>
+        <?php
+        //TOOD: this will be set earlier
+        $email = "gabbybmeow@gmail.com";
+
+
+        //get all the calendar dates for this user
+        $logList = array();
+        $query = "SELECT * FROM daily_log WHERE email = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_array()) {
+                array_push($logList, $row);
+            }
+            $stmt->close();
+        }
+        $calendar = new Calendar($logList);
+
+        echo $calendar->show();
+        ?>
     </article>
 
 </body>

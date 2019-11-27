@@ -5,12 +5,14 @@
   --happy: #f172a1;
   --super-happy: #e64398;
   --background: #a1c3d1;
+  --top-text: #fff;
   --tile-color: #bbd3dd;
 }
 
 body {
   font-family: "Lato", sans-serif;
   background-color: var(--background);
+  color: var(--top-text);
 }
 
 .navbar {
