@@ -34,7 +34,7 @@
 ?>
     <?php
     // define variables and set to empty values
-    $email = "Madelinemck@live.com";
+    $email = "gabs@lice.com";
     $selected_emotion = $note= $date= $tag = "";
 ?>
 
@@ -154,7 +154,7 @@
 
         <article>
             <?php
-        $email = "Madelinemck@live.com";
+        $email = "gabs@lice.com";
 
         //get all the calendar dates for this user
         $logList = array();
