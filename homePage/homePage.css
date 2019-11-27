@@ -209,6 +209,10 @@ body {
   transition: 0.3s;
 }
 
+.filter_sidebar .sidebar_contents {
+  padding: 5%;
+}
+
 .log {
   text-decoration: none;
   font-size: 16px;
@@ -227,4 +231,18 @@ body {
 
 .filter_sidebar a:hover {
   color: #f1f1f1;
+}
+
+.filter_sidebar .emoticons {
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filter_sidebar .radio_emotions {
+  padding-left: 6px;
+  padding-right: 6px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
 }
