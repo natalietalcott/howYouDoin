@@ -124,8 +124,7 @@ class Calendar
         }
 
         $key = array_search($this->currentDate, array_column($this->logList, 'date'));
-        if ($key != '') {
-            echo'theres something';
+        if ($key !== false) {
             $newClass = $this->logList[$key]["emotion"];
             $newNote = $this->logList[$key]["note"];
             if ($newNote != '') {
@@ -134,7 +133,6 @@ class Calendar
                 return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
             }
         } else {
-            echo'theres nothing';
             return '<li id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
             //"li-'
         }
