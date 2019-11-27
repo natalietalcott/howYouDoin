@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="homePage.css" />
+    <link rel="stylesheet" href="../fontawesome-free-5.11.2-web/css/all.css">
     <link href="calendar.css" type="text/css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>How You Doin'?</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="homePage.js"></script>
@@ -31,10 +31,17 @@
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
     }
     mysqli_next_result($conn);
-    ?>
+?>
+<?php
+    // define variables and set to empty values
+    $email = "Madelinemck@live.com";
+    $selected_emotion = $note= $date= $tag = "";
+?>
+
+<body id="body">
     <nav>
         <div class="navbar">
-            <a class="log" id="log" href="#"><i class="fa fa-pencil-square-o fa-2x"></i></a>
+            <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
             <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
         </div>
     </nav>
@@ -46,38 +53,90 @@
     <div id="log_sidebar" class="sidebar">
         <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
         <p class="daily_log">DAILY LOG</p>
-        <p id="emotion">EMOTION</p>
-        <p id="emoticon">EMOTICON</p>
-        <p id="note">NOTE</p>
-        <textarea rows="4" cols="50"></textarea>
-        <p id="tag">TAG</p>
-        <div class="submit_btn">
-            <p>SUBMIT</p>
+        <div class="sidebar_contents">
+            <?php
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['note'])){
+                    $note = ($_POST['note']);
+                }
+                if (isset($_POST['daily_tag'])){
+                    $tag = ($_POST['daily_tag']);
+                }
+                if (isset($_POST['Emoticon'])) {
+                    $selected_emotion = $_POST['Emoticon'];
+                    //echo($selected_emotion);
+                }
+                $date = date("m-d-Y");
+                //echo($date);
+                if (isset($_POST['submit'])){
+                    $newLog = "INSERT INTO DAILY_LOG (email, date, emotion, note,tag)VALUES ('".$email."','".$date."','".$selected_emotion."','".$note."','".$tag."')";
+                    if (mysqli_query($conn, $newLog)) {
+                       
+                     } else {
+                         
+                     }
+                }
+            }
+        ?>
+            <p id="emotion">EMOTION</p>
+            <div class="emoticons">
+                <?php
+                    echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
+                    echo "<i id='sad' class='far fa-frown fa-2x'></i>";
+                    echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
+                    echo "<i id='happy' class='far fa-smile fa-2x'></i>";
+                    echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
+                ?>
+            </div>
+            <form method="POST" action="homePage.php">
+                <div class="radio_emotions">
+                    <input type="radio" name="Emoticon" value="superSad" />
+                    <input type="radio" name="Emoticon" value="sad" />
+                    <input type="radio" name="Emoticon" value="neutral" />
+                    <input type="radio" name="Emoticon" value="happy" />
+                    <input type="radio" name="Emoticon" value="superHappy" />
+                </div>
+                <p id="note">NOTE</p>
+                <textarea rows="5" type="text" name="note" class="input_note"
+                    value="<?php echo $note;?>"></textarea><br>
+                <p id="tag">TAG</p>
+                <select name="daily_tag">
+                    <option value="weather">Weather</option>
+                    <option value="friends">Friends</option>
+                    <option value="family">Family</option>
+                    <option value="school">School</option>
+                    <option value="work">Work</option>
+                    <option value="drama">Drama</option>
+                    <option value="relationship">Relationship</option>
+                </select><br><br>
+                <input type="submit" name="submit"/>
+            </form>
+
         </div>
     </div>
 
     <article>
         <?php
-        //TOOD: this will be set earlier
-        $email = "gabbybmeow@gmail.com";
-
+        $email = "Madelinemck@live.com";
 
         //get all the calendar dates for this user
         $logList = array();
-        $query = "SELECT * FROM daily_log WHERE email = ?";
-        $stmt = $conn->prepare($query);
-        $stmt->bind_param("s", $email);
+        $query = "SELECT * FROM DAILY_LOG WHERE (email='$email')";
 
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
+        $result = mysqli_query($conn, $query);   
+        //$rowcount=$result->fetch_row();
+        
+        if($result)
+        {
             while ($row = $result->fetch_array()) {
                 array_push($logList, $row);
             }
-            $stmt->close();
+            mysqli_close($conn);
         }
         $calendar = new Calendar($logList);
 
         echo $calendar->show();
+        
         ?>
     </article>
 

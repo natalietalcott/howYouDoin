@@ -6,4 +6,10 @@ $(document).ready(function() {
   $("#closebtn").click(function() {
     $("#log_sidebar").css("width", "0%");
   });
+  /*
+  $("#super_sad").click(function() {
+    console.log("Here");
+    $("#emoticon").value("super_sad");
+  });
+  */
 });
