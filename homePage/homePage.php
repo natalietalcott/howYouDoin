@@ -34,7 +34,7 @@
     ?>
     <?php
     // define variables and set to empty values
-    $email = "gabs@lice.com";
+    $email = "gabbybmeow@gmail.com";
     $selected_emotion = $note = $date = $tag = "";
     ?>
 
@@ -159,11 +159,8 @@
 
         <article>
             <?php
-            // $email = "gabbybmeow@gmail.com";
-
             //get all the calendar dates for this user
             $logList = array();
-            echo "email:".$email;
             $query = "SELECT * FROM daily_log WHERE email = ?";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $email);
@@ -177,17 +174,6 @@
             else {
                 echo $stmt -> error;
             }
-            // $query = "SELECT * FROM DAILY_LOG WHERE (email='$email')";
-
-            // $result = mysqli_query($conn, $query);
-            // //$rowcount=$result->fetch_row();
-
-            // if ($result) {
-            //     while ($row = $result->fetch_array()) {
-            //         array_push($logList, $row);
-            //     }
-            //     mysqli_close($conn);
-            // }
             $calendar = new Calendar($logList);
 
             echo $calendar->show();
