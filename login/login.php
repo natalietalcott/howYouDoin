@@ -83,16 +83,7 @@
 				</form>
 			</div>
 			<p>New Member? <a href="../createAcc/createAcc.php">CREATE ACCOUNT</a><br>
-				<p>Did you forget your password you dumb shit? <span id="forget" onclick="forgot()">Reset
-						Password</span></p>
-
-				<script>
-					function forgot() {
-						document.getElementById("forget").style.color = "purple";
-						alert("An email was sent to you containing account recovery information");
-
-					}
-				</script>
+			<p><a href="../changePassword/changePassword.php">CHANGE PASSWORD</a><br>
 		</section>
 	</header>
 </body>
