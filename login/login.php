@@ -45,7 +45,6 @@
 			//echo($password);
 		}
 		if (isset($_POST['submit'])) {
-			//echo("here");
 			$query = "SELECT * FROM USER_ACCOUNT WHERE (email = ? && password = ?)";
 			$stmt = $conn->prepare($query);
             $stmt->bind_param("ss", $email, $password);
@@ -83,7 +82,7 @@
 					<input id="submit" type="submit" value="Log In" name="submit"><br><br>
 				</form>
 			</div>
-			<p>New Member? <a href="../createAcc/createAcc.html">CREATE ACCOUNT</a><br>
+			<p>New Member? <a href="../createAcc/createAcc.php">CREATE ACCOUNT</a><br>
 				<p>Did you forget your password you dumb shit? <span id="forget" onclick="forgot()">Reset
 						Password</span></p>
 
