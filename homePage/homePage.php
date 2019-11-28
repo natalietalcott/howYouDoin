@@ -161,7 +161,7 @@
             <?php
             //get all the calendar dates for this user
             $logList = array();
-            $query = "SELECT * FROM daily_log WHERE email = ?";
+            $query = "SELECT * FROM DAILY_LOG WHERE (email = ?)";
             $stmt = $conn->prepare($query);
             $stmt->bind_param("s", $email);
             if ($stmt->execute()) {
