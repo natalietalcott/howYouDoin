@@ -34,7 +34,7 @@
     ?>
     <?php
     // define variables and set to empty values
-    $email = "gabbybmeow@gmail.com";
+    $email = "jeffmck@live.com";
     $selected_emotion = $note = $date = $tag = "";
     ?>
 
