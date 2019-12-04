@@ -14,6 +14,18 @@
 
 <body id="body">
     <?php
+    $cookie_name = "loginCredentials";
+    if (!isset($_COOKIE[$cookie_name])) {
+        // Not logged in :(
+        header("Location: ../login/login.php"); /* Redirect browser */
+        exit();
+        // echo "Cookie named '" . $cookie_name . "' is not set!";
+    } else {
+        // Logged In
+        // echo "Cookie '" . $cookie_name . "' is set!<br>";
+        // echo "Value is: " . $_COOKIE[$cookie_name];
+    }
+
     include('database_connection.php');
     include 'calendar.php';
     $query = file_get_contents('databaseCreation.sql');
@@ -33,16 +45,18 @@
     mysqli_next_result($conn);
     ?>
     <?php
-    // define variables and set to empty values
-    $email = "jeffmck@live.com";
+    // define variables and set to empty values where necessary
+    // $email = "jeffmck@live.com";
+    $email = $_COOKIE[$cookie_name];
     $selected_emotion = $note = $date = $tag = "";
     ?>
 
     <body id="body">
         <nav>
             <div class="navbar">
-                <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
-                <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
+                <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
+                <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a>
+                <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
             </div>
         </nav>
         <header>
@@ -74,11 +88,12 @@
                         $stmt->bind_param("sssss", $email, $date, $selected_emotion, $note, $tag);
                         if ($stmt->execute()) {
                             echo "New records created successfully";
-                        }
-                        else {
-                            echo $stmt -> error;
+                        } else {
+                            echo $stmt->error;
                         }
                         $stmt->close();
+                        //extend cookie for activity
+                        setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
                         // $newLog = "INSERT INTO daily_log(email, date, emotion, note,tag)VALUES ('" . $email . "','" . $date . "','" . $selected_emotion . "','" . $note . "','" . $tag . "')";
                         // if (mysqli_query($conn, $newLog)) { echo"jdhflkdjhfa";} else {echo"bad"; }
                     }
@@ -156,7 +171,6 @@
                 </form>
             </div>
         </div>
-
         <article>
             <?php
             //get all the calendar dates for this user
@@ -170,9 +184,8 @@
                     array_push($logList, $row);
                 }
                 $stmt->close();
-            }
-            else {
-                echo $stmt -> error;
+            } else {
+                echo $stmt->error;
             }
             $calendar = new Calendar($logList);
 
@@ -182,5 +195,6 @@
         </article>
 
     </body>
+
 
 </html>
