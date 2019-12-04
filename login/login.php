@@ -75,7 +75,7 @@
 	<header>
 		<section id="login">
 			<h1> How You Doin? </h1>
-			<!-- <h2> Log In </h2> -->
+			<h2> Log In </h2>
 			<div id="formWrap">
 				<form method="post">
 					<!-- action="./ajax_submit.php"-->

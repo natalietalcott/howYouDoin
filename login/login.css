@@ -28,7 +28,8 @@ header {
 }
 
 #email,
-#password {
+#password,
+#reenter {
   padding: 5px;
 }
 
@@ -68,6 +69,7 @@ form input {
 }
 
 #email_label,
-#pass_label {
+#pass_label,
+#repass_label {
   display: none;
 }
