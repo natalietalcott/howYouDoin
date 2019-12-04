@@ -45,8 +45,9 @@
     mysqli_next_result($conn);
     ?>
     <?php
-    // define variables and set to empty values
-    $email = "jeffmck@live.com";
+    // define variables and set to empty values where necessary
+    // $email = "jeffmck@live.com";
+    $email = $_COOKIE[$cookie_name];
     $selected_emotion = $note = $date = $tag = "";
     ?>
 
