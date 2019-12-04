@@ -55,7 +55,15 @@
 			$stmt->bind_param("ss", $password, $email);
 			if ($stmt->execute()) {
 				header('Location: ../homePage/homePage.php');
-				//echo ("created account successfully");
+				//send an email to let them know their password was reset
+				$to = $email;
+				$subject = "HowYouDoin' Account Information";
+				$msg = "Your password was just reset.\nIf you don't think this was you, maybe you should reset it yourself!!";
+				// use wordwrap() if lines are longer than 70 characters
+				$msg = wordwrap($msg, 70);
+				$headers = "From: gabbybmeow@gmail.com" . "\r\n";
+				//send the email
+				mail($to, $subject, $msg, $headers);
 			} else {
 				//echo("Failed");
 				alert("was not able to create account");
@@ -93,7 +101,7 @@
 					<input id="password" type="password" name="password" placeholder="Password"><br><br>
 
 					<label for="reenter" id="repass_label">Re-enter New Password:</label>
-					<input id="reenter" type="password" name="password" placeholder="Confirm New Password"><br><br>
+					<input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
 
 					<input id="submit" type="submit" value="Log In" name="submit"><br><br>
 				</form>
