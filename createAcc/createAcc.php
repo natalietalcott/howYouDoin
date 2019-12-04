@@ -54,6 +54,7 @@
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("ss", $email, $password);
 			if ($stmt->execute()) {
+				setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
 				header('Location: ../homePage/homePage.php');
 				//send an email to let them activate their account
 				$to = $email;
@@ -68,7 +69,8 @@
 <p>You just created a HowYouDoin\' account!</p>
 <p>Get ready to start trackin\'!!</p>
 <span>Click this link to activate ur account:</span>
-<a href="localhost:8080/howYouDoin/activate/activate.php">Activate My Account!</a>
+<a href="localhost:8080/howYouDoin/activate/activate.php?email=' . $email.
+'">Activate My Account!</a>
 </body>
 </html>
 ';
