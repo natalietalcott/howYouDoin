@@ -54,10 +54,8 @@
     <body id="body">
         <nav>
             <div class="navbar">
-                <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
-                <a id="logout" href="../login/login.php">LOG OUT</a>
-                <!--  echo '<a id = "logout" href='.setcookie("loginCredentials", $email, -1, "/").'">LOG OUT</a>' -->
-                <!-- <a id="logout" href="">LOG OUT</a> -->
+                <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
+                <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a>
                 <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
             </div>
         </nav>
