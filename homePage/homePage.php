@@ -14,6 +14,18 @@
 
 <body id="body">
     <?php
+    $cookie_name = "loginCredentials";
+    if (!isset($_COOKIE[$cookie_name])) {
+        echo "Not logged in :(";
+        header("Location: ../login/login.php"); /* Redirect browser */
+        exit();
+        // echo "Cookie named '" . $cookie_name . "' is not set!";
+    } else {
+        echo "Logged In";
+        // echo "Cookie '" . $cookie_name . "' is set!<br>";
+        // echo "Value is: " . $_COOKIE[$cookie_name];
+    }
+
     include('database_connection.php');
     include 'calendar.php';
     $query = file_get_contents('databaseCreation.sql');
@@ -74,9 +86,8 @@
                         $stmt->bind_param("sssss", $email, $date, $selected_emotion, $note, $tag);
                         if ($stmt->execute()) {
                             echo "New records created successfully";
-                        }
-                        else {
-                            echo $stmt -> error;
+                        } else {
+                            echo $stmt->error;
                         }
                         $stmt->close();
                         // $newLog = "INSERT INTO daily_log(email, date, emotion, note,tag)VALUES ('" . $email . "','" . $date . "','" . $selected_emotion . "','" . $note . "','" . $tag . "')";
@@ -156,7 +167,6 @@
                 </form>
             </div>
         </div>
-
         <article>
             <?php
             //get all the calendar dates for this user
@@ -170,9 +180,8 @@
                     array_push($logList, $row);
                 }
                 $stmt->close();
-            }
-            else {
-                echo $stmt -> error;
+            } else {
+                echo $stmt->error;
             }
             $calendar = new Calendar($logList);
 
