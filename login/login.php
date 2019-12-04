@@ -57,7 +57,7 @@
 				$stmt->close();
 				if ($count > 0){
 					header('Location: ../homePage/homePage.php');
-					setcookie("loginCredentials", $email, time() + 10, "/"); //expires after 10 seconds
+					setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
 					// Expiring after 2 hours = time() * 7200
 				} else {
 					echo("this echo does not exist");

@@ -91,6 +91,8 @@
                             echo $stmt->error;
                         }
                         $stmt->close();
+                        //extend cookie for activity
+                        setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
                         // $newLog = "INSERT INTO daily_log(email, date, emotion, note,tag)VALUES ('" . $email . "','" . $date . "','" . $selected_emotion . "','" . $note . "','" . $tag . "')";
                         // if (mysqli_query($conn, $newLog)) { echo"jdhflkdjhfa";} else {echo"bad"; }
                     }
@@ -192,5 +194,6 @@
         </article>
 
     </body>
+
 
 </html>
