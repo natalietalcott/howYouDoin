@@ -58,10 +58,27 @@
 				//send an email to let them activate their account
 				$to = $email;
 				$subject = "HowYouDoin' Account Information";
-				$msg = "You just created a HowYouDoin' account!\nGet ready to start trackin'!!\nClick this nonexistant link to activate ur account:";
+				// $msg = "You just created a HowYouDoin' account!\nGet ready to start trackin'!!\nClick this nonexistant link to activate your account:";
+				$message = '
+<html>
+<head>
+<title>HTML email</title>
+</head>
+<body>
+<p>You just created a HowYouDoin\' account!</p>
+<p>Get ready to start trackin\'!!</p>
+<span>Click this link to activate ur account:</span>
+<a href="localhost:8080/howYouDoin/activate/activate.php">Activate My Account!</a>
+</body>
+</html>
+';
+
+				// Always set content-type when sending HTML email
+				$headers = "MIME-Version: 1.0" . "\r\n";
+
 				// use wordwrap() if lines are longer than 70 characters
 				$msg = wordwrap($msg, 70);
-				$headers = "From: gabbybmeow@gmail.com" . "\r\n";
+				$headers .= "From: gabbybmeow@gmail.com" . "\r\n";
 				//send the email
 				mail($to, $subject, $msg, $headers);
 			} else {
@@ -101,7 +118,7 @@
 
 					<label for="reenter" id="repass_label">Re-enter New Password:</label>
 					<input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
-					
+
 					<input id="submit" type="submit" value="Log In" name="submit"><br><br>
 				</form>
 			</div>
