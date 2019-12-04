@@ -16,12 +16,12 @@
     <?php
     $cookie_name = "loginCredentials";
     if (!isset($_COOKIE[$cookie_name])) {
-        echo "Not logged in :(";
+        // Not logged in :(
         header("Location: ../login/login.php"); /* Redirect browser */
         exit();
         // echo "Cookie named '" . $cookie_name . "' is not set!";
     } else {
-        echo "Logged In";
+        // Logged In
         // echo "Cookie '" . $cookie_name . "' is set!<br>";
         // echo "Value is: " . $_COOKIE[$cookie_name];
     }
@@ -55,7 +55,10 @@
         <nav>
             <div class="navbar">
                 <a class="log" id="log" href="#"><i class="far fa-edit fa-2x"></i></a>
-                <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a>
+                <a id="logout" href="../login/login.php">LOG OUT</a>
+                <!--  echo '<a id = "logout" href='.setcookie("loginCredentials", $email, -1, "/").'">LOG OUT</a>' -->
+                <!-- <a id="logout" href="">LOG OUT</a> -->
+                <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
             </div>
         </nav>
         <header>

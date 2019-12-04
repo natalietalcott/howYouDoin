@@ -12,6 +12,9 @@
 
 <body>
 	<?php
+	//reset cookie at begininning
+	setcookie("loginCredentials", "", -1, "/");
+
 	//try to connect to the backend so we can verify the login
     include('../homePage/database_connection.php');
     $query = file_get_contents('../homePage/databaseCreation.sql');
@@ -57,7 +60,7 @@
 				$stmt->close();
 				if ($count > 0){
 					header('Location: ../homePage/homePage.php');
-					setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+					setcookie("loginCredentials", $email, time() + 700, "/"); //expires after 20 seconds
 					// Expiring after 2 hours = time() * 7200
 				} else {
 					echo("this echo does not exist");
