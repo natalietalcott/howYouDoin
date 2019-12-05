@@ -80,6 +80,7 @@ class Calendar
             for ($j = 1; $j <= 7; $j++) {
                 $content .= $this->_showDay($i * 7 + $j);
             }
+            
         }
 
         $content .= '</ul>';
@@ -128,12 +129,12 @@ class Calendar
             $newClass = $this->logList[$key]["emotion"];
             $newNote = $this->logList[$key]["note"];
             if ($newNote != '') {
-                return '<li class="' . $newClass . ' tagged" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '<p>~</p></li>';
+                return '<li class="' . $newClass . ' tagged" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?day='.($this->currentDay-1).'?month='.($this->currentMonth).'">' . $cellContent .'</a><p>~</p></li>';
             } else {
-                return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
+                return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?day='.($this->currentDay-1).'?month='.($this->currentMonth).'">' . $cellContent .'</a></li>';
             }
         } else {
-            return '<li id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '">' . $cellContent . '</li>';
+            return '<li id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?day='.($this->currentDay-1).'?month='.($this->currentMonth).'">' . $cellContent .'</a></li>';
             //"li-'
         }
     }
