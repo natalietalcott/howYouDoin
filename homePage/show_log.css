@@ -1,0 +1,53 @@
+:root {
+  --super-sad: #ad2e95;
+  --sad: #b39bc8;
+  --neutral: #f0ebf4;
+  --happy: #f172a1;
+  --super-happy: #e64398;
+  --background: #a1c3d1;
+  --top-text: #fff;
+  --tile-color: #bbd3dd;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  background-color: var(--background);
+  color: var(--top-text);
+}
+
+
+#happy {
+  color: var(--happy);
+}
+
+#super_happy {
+  color: var(--super-happy);
+}
+
+#super_happy_selected {
+  color: var(--super-happy);
+}
+
+#neutral {
+  color: var(--neutral);
+}
+
+#neutral_selected {
+  color: var(--neutral);
+}
+
+#sad {
+  color: var(--sad);
+}
+
+#sad_selected {
+  color: var(--sad);
+}
+
+#super_sad {
+  color: var(--super-sad);
+}
+
+#super_sad_selected {
+  color: var(--super-sad);
+}

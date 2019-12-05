@@ -62,6 +62,7 @@ div#calendar div.header a.next {
   right: 0px;
 }
 
+
 /*******************************Calendar Content Cells*********************************/
 div#calendar div.box-content {
   border: 1px solid var(--background);
