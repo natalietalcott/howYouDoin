@@ -48,7 +48,7 @@
 			//echo($password);
 		}
 		if (isset($_POST['submit'])) {
-			$query = "SELECT * FROM USER_ACCOUNT WHERE (email = ? && password = ?)";
+			$query = "SELECT * FROM USER_ACCOUNT WHERE (email = ? && password = ?) && activated = true";
 			$stmt = $conn->prepare($query);
             $stmt->bind_param("ss", $email, $password);
             if ($stmt->execute()) {
@@ -63,6 +63,7 @@
 					setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
 					// Expiring after 2 hours = time() * 7200
 				} else {
+					//TODO: ADD COULD NOT LOGIN THING
 					echo("this echo does not exist");
 				}
             }

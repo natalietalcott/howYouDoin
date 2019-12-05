@@ -37,11 +37,11 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (isset($_POST['submit'])) {
-			// $query = "UPDATE USER_ACCOUNT SET activated = true WHERE (email = ?)";
-			// $stmt = $conn->prepare($query);
-			// $stmt->bind_param("s", $email);
-			// if ($stmt->execute()) {
-            //     setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+			$query = "UPDATE USER_ACCOUNT SET activated = true WHERE (email = ?)";
+			$stmt = $conn->prepare($query);
+			$stmt->bind_param("s", $email);
+			if ($stmt->execute()) {
+                setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
 				header('Location: ../homePage/homePage.php');
 				//send an email to let them know they successfully activated their account
 				$to = $email;
@@ -52,11 +52,11 @@
 				$headers = "From: gabbybmeow@gmail.com" . "\r\n";
 				//send the email
 				mail($to, $subject, $msg, $headers);
-			// } else {
-			// 	//echo("Failed");
-			// 	alert("was not able to create account");
-			// }
-			// $stmt->close();
+			} else {
+				//echo("Failed");
+				alert("was not able to activate account");
+			}
+			$stmt->close();
 		}
 	}
     ?>
