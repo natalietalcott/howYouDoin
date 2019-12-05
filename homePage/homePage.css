@@ -10,9 +10,61 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
   background-color: var(--background);
+  height: 100%;
   color: var(--top-text);
+  font-family: Helvetica, "Times New Roman", Times, serif;
+}
+header {
+  margin: auto;
+  /* width: 50%; */
+  text-align: center;
+}
+#email,
+#password,
+#reenter {
+  padding: 5px;
+}
+
+#forget {
+  color: blue;
+  text-decoration: underline;
+}
+
+section {
+  background-color: var(--background);
+  /* background-color: rgba(255, 255, 255, 0.0); */
+  border: 2px var(--sad) solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin: auto;
+  width: 90%;
+  height: 100%;
+  text-align: center;
+}
+
+#formWrap {
+  display: block;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  clear: both;
+}
+
+form input {
+  width: 100%;
+  clear: both;
+  box-sizing: border-box;
+}
+
+#email_label,
+#pass_label,
+#repass_label {
+  display: none;
 }
 
 .navbar {
@@ -187,6 +239,10 @@ body {
   background-color: var(--tile-color);
   overflow-x: hidden;
   transition: 0.5s;
+  
+}
+.filter_sidebar p{
+  font-size: 30px;
 }
 
 .filter_sidebar .fclosebtn {
@@ -205,9 +261,9 @@ body {
 }
 
 .filter_sidebar a {
-  padding: 8px 8px 8px 32px;
+  /* padding: 8px 8px 8px 32px; */
   text-decoration: none;
-  font-size: 25px;
+  /* font-size: 25px; */
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -235,7 +291,7 @@ body {
 
 .logout {
   text-decoration: none;
-  font-size: 36px;
+  font-size: 30px;
   color: #818181;
   display: block;
   transition: 0.3s;

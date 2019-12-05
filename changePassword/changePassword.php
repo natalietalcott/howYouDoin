@@ -5,8 +5,8 @@
 
 <head>
 	<meta charset="utf-8" />
-	<!-- <link rel="stylesheet" type="text/css" href="changePassword.css" /> -->
 	<link rel="stylesheet" type="text/css" href="../login/login.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="/howYouDoin/changePassword/changePassword.css" /> -->
 	<title>Change Password</title>
 
 </head>
@@ -33,12 +33,12 @@
 	?>
 	<?php
 	//set the variables
-	$email = $password = $confirm_password = '';
+	$newEmail = $password = $confirm_password = '';
 	?>
 	<?php
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 		if (isset($_POST['email'])) {
-			$email = $_POST['email'];
+			$newEmail = $_POST['email'];
 		}
 		if (isset($_POST['password'])) {
 			$password = $_POST['password'];
@@ -52,12 +52,12 @@
 			}
 			$query = "UPDATE USER_ACCOUNT SET password = ? WHERE (email = ?)";
 			$stmt = $conn->prepare($query);
-			$stmt->bind_param("ss", $password, $email);
+			$stmt->bind_param("ss", $password, $newEmail);
 			if ($stmt->execute()) {
-				setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
+				setcookie("loginCredentials", $newEmail, time() + 120, "/"); //expires after 120 seconds
 				header('Location: ../homePage/homePage.php');
 				//send an email to let them know their password was reset
-				$to = $email;
+				$to = $newEmail;
 				$subject = "HowYouDoin' Account Information";
 				$msg = "Your password was just reset.\nIf you don't think this was you, maybe you should reset it yourself!!";
 				// use wordwrap() if lines are longer than 70 characters

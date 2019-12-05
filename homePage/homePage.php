@@ -59,6 +59,42 @@
     // $email = "jeffmck@live.com";
     $email = $_COOKIE[$cookie_name];
     $selected_emotion = $note = $date = $tag = "";
+
+
+
+    //change password
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if (isset($_POST['password'])) {
+            $password = $_POST['password'];
+        }
+        if (isset($_POST['confirm_password'])) {
+            $confirm_password = $_POST['confirm_password'];
+        }
+        if (isset($_POST['submit'])) {
+            if ($password != $confirm_password) {
+                alert("Passwords do NOT match");
+            }
+            $query = "UPDATE USER_ACCOUNT SET password = ? WHERE (email = ?)";
+            $stmt = $conn->prepare($query);
+            $stmt->bind_param("ss", $password, $email);
+            if ($stmt->execute()) {
+                setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
+                //send an email to let them know their password was reset
+                $to = $email;
+                $subject = "HowYouDoin' Account Information";
+                $msg = "Your password was just reset.\nIf you don't think this was you, maybe you should reset it yourself!!";
+                // use wordwrap() if lines are longer than 70 characters
+                $msg = wordwrap($msg, 70);
+                $headers = "From: gabbybmeow@gmail.com" . "\r\n";
+                //send the email
+                mail($to, $subject, $msg, $headers);
+            } else {
+                //echo("Failed");
+                alert("was not able to create account");
+            }
+            $stmt->close();
+        }
+    }
     ?>
 
     <body id="body">
@@ -66,8 +102,10 @@
         <nav>
             <div class="navbar">
                 <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
-                <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a>
+                <!-- <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a> -->
                 <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
+                <a class="filter" id="filter" href="#"><i class="fas fa-users-cog fa-2x"></i></a>
+
             </div>
         </nav>
         <header>
@@ -104,7 +142,7 @@
                         }
                         $stmt->close();
                         //extend cookie for activity
-                        setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
+                        // setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
                     }
                 }
                 ?>
@@ -146,17 +184,46 @@
 
         <div id="filter_sidebar" class="filter_sidebar">
             <a href="javascript:void(0)" id="fclosebtn" class="fclosebtn">&times;</a>
-            <p class="filter_log">FILTER LOGS</p>
+            <p class="filter_log">USER SETTINGS</p>
+            <div class="sidebar_contents">
+                <div id="lo">
+                    <p>Want to Log Out??<a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a></p>
+                    
+                </div>
+                <section class="changePwd">
+                    <h2> Change My Password! </h2>
+                    <div id="change">
+                        <form method="post">
+                            <!-- <label for="email" id="email_label">Email</label>
+                            <input id="email" type="email" name="email" placeholder="Email"><br><br> -->
+
+                            <label for="password" id="pass_label">New Password:</label>
+                            <input id="password" type="password" name="password" placeholder="Password"><br><br>
+
+                            <label for="reenter" id="repass_label">Re-enter New Password:</label>
+                            <input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
+
+                            <input id="submit" type="submit" value="Change Password" name="submit"><br><br>
+                        </form>
+                    </div>
+                    <?php
+                    // $_GET['email'] = $email;
+                    // include '../changePassword/changePassword.php';
+
+                    ?>
+                </section>
+            </div>
+            <!-- <p class="filter_log">FILTER LOGS</p>
             <div class="sidebar_contents">
                 <p id="emotion">EMOTION</p>
                 <div class="emoticons">
-                    <?php
+                    
                     echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
                     echo "<i id='sad' class='far fa-frown fa-2x'></i>";
                     echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
                     echo "<i id='happy' class='far fa-smile fa-2x'></i>";
                     echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                    ?>
+                    
                 </div>
                 <form method="POST" action="homePage.php">
                     <div class="radio_emotions">
@@ -178,7 +245,7 @@
                     </select><br><br>
                     <input type="submit" name="Filter" value="Filter" />
                 </form>
-            </div>
+            </div> -->
         </div>
         <article>
             <?php
