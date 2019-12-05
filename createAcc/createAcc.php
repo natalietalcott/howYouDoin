@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<!-- <link rel="stylesheet" type="text/css" href="createAcc.css" /> -->
 	<link rel="stylesheet" type="text/css" href="../login/login.css" />
-	<title>create account</title>
+	<title>Create Account</title>
 
 </head>
 
