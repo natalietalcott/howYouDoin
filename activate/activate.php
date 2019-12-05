@@ -65,6 +65,7 @@
             <h1> How You Doin? </h1>
             <h2> Activate Account! </h2>
             <div>
+                <p>Click below to activate your account so you can login!</p>
                 <form method="post">
                     <input id="submit" type="submit" value="Activate Account" name="submit"><br><br>
                 </form>

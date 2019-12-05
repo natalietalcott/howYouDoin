@@ -54,13 +54,12 @@
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("ss", $email, $password);
 			if ($stmt->execute()) {
-				setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
-				header('Location: ../homePage/homePage.php');
+				header('Location: createSucc.php');
 				//send an email to let them activate their account
 				$to = $email;
 				$subject = "HowYouDoin' Account Information";
 				// $msg = "You just created a HowYouDoin' account!\nGet ready to start trackin'!!\nClick this nonexistant link to activate your account:";
-				$message = '
+				$msg = '
 <html>
 <head>
 <title>HTML email</title>
@@ -69,14 +68,15 @@
 <p>You just created a HowYouDoin\' account!</p>
 <p>Get ready to start trackin\'!!</p>
 <span>Click this link to activate ur account:</span>
-<a href="localhost:8080/howYouDoin/activate/activate.php?email=' . $email.
-'">Activate My Account!</a>
+<a href="http://localhost:80/howYouDoin/activate/activate.php?email=' . $email .
+					'">Activate My Account!</a>
 </body>
 </html>
 ';
 
 				// Always set content-type when sending HTML email
 				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 				// use wordwrap() if lines are longer than 70 characters
 				$msg = wordwrap($msg, 70);
