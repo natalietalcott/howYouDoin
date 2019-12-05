@@ -1,4 +1,16 @@
 # howYouDoin
+README
+The How You Doin Website
+Authors: Gabby Barbieri, Madeline McKune, Natalie Talcott
+Description: 
+	The website is a place for users to log their emotions on a daily basis. Users can login, add an emotion log daily, update logs of the current day, and delete old days. 
+Login (start here login.php): 
+	Users can login at the login page, or create account if they don't have one. For grading purposes, see below in order for email to work. You should recieve an email after creating an
+	account to activate your account. After your account is activated, you can login.
+Calender:
+	After logging in, the user can view the calender. Days with logs are colored according to the corresponding emotion: happy to sad. To record a new log, the user can click on the icon 
+	in the top left. Clicking on a day allows the user to view the log, update the current log, and delete old logs. To log out and change passwords, the user can click on the icon in the
+	top right. 
 
 For Email to work:
 need to modify php.ini (change to respective values for your xampp location and email server):
