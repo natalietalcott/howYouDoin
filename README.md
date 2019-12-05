@@ -67,4 +67,5 @@ need to modify sendmail.ini (again change to respective values for your server):
     auth_username=your-email@gmail.com
     auth_password=your-password
 NOTE: for gmail you will likely need to have 2FA and generate an app password for this
+
 Additionally, you will need to change the "$headers .= "From: gabbybmeow@gmail.com" . "\r\n";" to whatever email you wish to use in a few locations

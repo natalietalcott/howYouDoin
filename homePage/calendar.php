@@ -129,9 +129,9 @@ class Calendar
             $newClass = $this->logList[$key]["emotion"];
             $newNote = $this->logList[$key]["note"];
             if ($newNote != '') {
-                return '<li class="' . $newClass . ' tagged" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?day='.($this->currentDay-1).'?month='.($this->currentMonth).'">' . $cellContent .'</a><p>~</p></li>';
+                return '<li class="' . $newClass . ' tagged" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?date='.($this->currentDate).'">' . $cellContent .'</a><p>~</p></li>';
             } else {
-                return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?day='.($this->currentDay-1).'?month='.($this->currentMonth).'">' . $cellContent .'</a></li>';
+                return '<li class="' . $newClass . '" id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?date='.($this->currentDate).'">' . $cellContent .'</a></li>';
             }
         } else {
             return '<li id="' . $this->currentDate . '" class="' . ($cellNumber % 7 == 1 ? ' start ' : ($cellNumber % 7 == 0 ? ' end ' : ' ')) . ($cellContent == null ? 'mask' : '') . '"><a href="/howYouDoin/homePage/show_log.php?date='.($this->currentDate).'">' . $cellContent .'</a></li>';
