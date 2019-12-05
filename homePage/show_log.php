@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="../../login.css" />
+	<!-- <link rel="stylesheet" type="text/css" href="/howYouDoin/login/login.css" /> -->
 	<link rel="stylesheet" type="text/css" href="show_log.css" />
 	<title>View Log</title>
 

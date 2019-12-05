@@ -157,3 +157,8 @@ div#calendar ul.dates li.mask {
   width: 78px;
   height: 78px;
 } */
+
+a {
+  /* text-decoration: none; */
+  color:var(--top-text);
+}

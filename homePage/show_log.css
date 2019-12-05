@@ -1,7 +1,8 @@
 :root {
   --super-sad: #ad2e95;
   --sad: #b39bc8;
-  --neutral: #f0ebf4;
+  /* --neutral: #f0ebf4; */
+  --neutral: #d287b5;
   --happy: #f172a1;
   --super-happy: #e64398;
   --background: #a1c3d1;
@@ -10,9 +11,9 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
-  background-color: var(--background);
+  height: 100%;
   color: var(--top-text);
+  font-family: Helvetica, "Times New Roman", Times, serif;
 }
 
 
@@ -50,4 +51,46 @@ body {
 
 #super_sad_selected {
   color: var(--super-sad);
+}
+
+header {
+  margin: auto;
+  /* width: 50%; */
+  text-align: center;
+}
+
+section {
+  background-color: var(--background);
+  /* background-color: rgba(255, 255, 255, 0.0); */
+  border: 2px var(--sad) solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin: auto;
+  width: 25%;
+  height: 75%;
+  text-align: center;
+}
+
+#formWrap {
+  display: block;
+  text-align: center;
+}
+form {
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+  clear: both;
+}
+
+form input {
+  width: 100%;
+  clear: both;
+  box-sizing: border-box;
+}
+
+#email_label,
+#pass_label,
+#repass_label {
+  display: none;
 }
