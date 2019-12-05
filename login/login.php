@@ -60,7 +60,7 @@
 				$stmt->close();
 				if ($count > 0) {
 					header('Location: ../homePage/homePage.php');
-					setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+					setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
 					// Expiring after 2 hours = time() * 7200
 				} else {
 					//TODO: ADD COULD NOT LOGIN THING

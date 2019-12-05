@@ -62,6 +62,20 @@
     ?>
 
     <body id="body">
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Open Modal</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Some text in the Modal..</p>
+                <?php include 'show_log.php';?>
+            </div>
+
+        </div>
         <nav>
             <div class="navbar">
                 <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
@@ -103,7 +117,7 @@
                         }
                         $stmt->close();
                         //extend cookie for activity
-                        setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+                        setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
                     }
                 }
                 ?>
