@@ -65,6 +65,7 @@
             $stmt->bind_param("ss", $email, $date);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
+                header('Location: ../homePage/homePage.php');
             } else {
                 echo ("ERROR");
             }
@@ -88,6 +89,7 @@
             $stmt->bind_param("sssss", $tag, $note, $emotion, $email, $date);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
+                header('Location: ../homePage/homePage.php');
             } else {
                 echo ("ERROR");
             }
