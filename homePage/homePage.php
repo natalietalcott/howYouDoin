@@ -24,6 +24,16 @@
         // Logged In
         // echo "Cookie '" . $cookie_name . "' is set!<br>";
         // echo "Value is: " . $_COOKIE[$cookie_name];
+
+        // //send an email
+        // $to = $_COOKIE[$cookie_name];
+        // $subject = "Test Subject";
+        // $msg = "You logged into my website!!\nSuper neat! :))";
+        // // use wordwrap() if lines are longer than 70 characters
+        // // $msg = wordwrap($msg, 70);
+        // $headers = "From: gabbybmeow@gmail.com" . "\r\n"; 
+        // //send email
+        // mail($to, $subject, $msg, $headers);
     }
 
     include('database_connection.php');
@@ -94,8 +104,6 @@
                         $stmt->close();
                         //extend cookie for activity
                         setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
-                        // $newLog = "INSERT INTO daily_log(email, date, emotion, note,tag)VALUES ('" . $email . "','" . $date . "','" . $selected_emotion . "','" . $note . "','" . $tag . "')";
-                        // if (mysqli_query($conn, $newLog)) { echo"jdhflkdjhfa";} else {echo"bad"; }
                     }
                 }
                 ?>

@@ -7,7 +7,7 @@
 	<meta charset="utf-8" />
 	<!-- <link rel="stylesheet" type="text/css" href="createAcc.css" /> -->
 	<link rel="stylesheet" type="text/css" href="../login/login.css" />
-	<title>create account</title>
+	<title>Create Account</title>
 
 </head>
 
@@ -54,8 +54,35 @@
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("ss", $email, $password);
 			if ($stmt->execute()) {
-				header('Location: ../homePage/homePage.php');
-				//echo ("created account successfully");
+				header('Location: createSucc.php');
+				//send an email to let them activate their account
+				$to = $email;
+				$subject = "HowYouDoin' Account Information";
+				// $msg = "You just created a HowYouDoin' account!\nGet ready to start trackin'!!\nClick this nonexistant link to activate your account:";
+				$msg = '
+<html>
+<head>
+<title>HTML email</title>
+</head>
+<body>
+<p>You just created a HowYouDoin\' account!</p>
+<p>Get ready to start trackin\'!!</p>
+<span>Click this link to activate ur account:</span>
+<a href="http://localhost:80/howYouDoin/activate/activate.php?email=' . $email .
+					'">Activate My Account!</a>
+</body>
+</html>
+';
+
+				// Always set content-type when sending HTML email
+				$headers = "MIME-Version: 1.0" . "\r\n";
+				$headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+				// use wordwrap() if lines are longer than 70 characters
+				$msg = wordwrap($msg, 70);
+				$headers .= "From: gabbybmeow@gmail.com" . "\r\n";
+				//send the email
+				mail($to, $subject, $msg, $headers);
 			} else {
 				//echo("Failed");
 				alert("was not able to create account");
@@ -88,8 +115,12 @@
 					<label for="email" id="email_label">Email</label>
 					<input id="email" type="email" name="email" placeholder="Email"><br><br>
 
-					<label for="password" id="pass_label">Password</label>
+					<label for="password" id="pass_label">New Password:</label>
 					<input id="password" type="password" name="password" placeholder="Password"><br><br>
+
+					<label for="reenter" id="repass_label">Re-enter New Password:</label>
+					<input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
+
 					<input id="submit" type="submit" value="Log In" name="submit"><br><br>
 				</form>
 			</div>
