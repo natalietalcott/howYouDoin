@@ -11,6 +11,8 @@ Calender:
 	After logging in, the user can view the calender. Days with logs are colored according to the corresponding emotion: happy to sad. To record a new log, the user can click on the icon 
 	in the top left. Clicking on a day allows the user to view the log, update the current log, and delete old logs. To log out and change passwords, the user can click on the icon in the
 	top right. 
+Page Timeout: For testing purposes, the page timeout is set to two minutes.
+
 
 For Email to work:
 need to modify php.ini (change to respective values for your xampp location and email server):
