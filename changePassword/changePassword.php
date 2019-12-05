@@ -54,7 +54,7 @@
 			$stmt = $conn->prepare($query);
 			$stmt->bind_param("ss", $password, $email);
 			if ($stmt->execute()) {
-				setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+				setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
 				header('Location: ../homePage/homePage.php');
 				//send an email to let them know their password was reset
 				$to = $email;

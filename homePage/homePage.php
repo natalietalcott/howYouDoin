@@ -62,6 +62,7 @@
     ?>
 
     <body id="body">
+
         <nav>
             <div class="navbar">
                 <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
@@ -103,7 +104,7 @@
                         }
                         $stmt->close();
                         //extend cookie for activity
-                        setcookie("loginCredentials", $email, time() + 20, "/"); //expires after 20 seconds
+                        setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
                     }
                 }
                 ?>
