@@ -16,21 +16,8 @@
         // Not logged in :(
         header("Location: ../login/login.php"); /* Redirect browser */
         exit();
-        // echo "Cookie named '" . $cookie_name . "' is not set!";
     } else {
         // Logged In
-        // echo "Cookie '" . $cookie_name . "' is set!<br>";
-        // echo "Value is: " . $_COOKIE[$cookie_name];
-
-        // //send an email
-        // $to = $_COOKIE[$cookie_name];
-        // $subject = "Test Subject";
-        // $msg = "You logged into my website!!\nSuper neat! :))";
-        // // use wordwrap() if lines are longer than 70 characters
-        // // $msg = wordwrap($msg, 70);
-        // $headers = "From: gabbybmeow@gmail.com" . "\r\n"; 
-        // //send email
-        // mail($to, $subject, $msg, $headers);
     }
 
     include('database_connection.php');
@@ -82,11 +69,10 @@
             
             if (isset($_POST['emotion'])) {
                 $selectedEmotion = $_POST['emotion'];
-                //echo($selected_emotion);
             }
             $query = "UPDATE DAILY_LOG SET tag=?, note=?, emotion=?  WHERE (email = ? && date = ?)";
             $stmt = $conn->prepare($query);
-            $stmt->bind_param("sssss", $tag, $note, $emotion, $email, $date);
+            $stmt->bind_param("sssss", $tag, $note, $selectedEmotion, $email, $date);
             if ($stmt->execute()) {
                 $result = $stmt->get_result();
                 header('Location: ../homePage/homePage.php');
@@ -127,7 +113,7 @@
                         <option value = ""> Change Emotion </option>
                         <option value="super-sad">Super Sad</option>
                         <option value="sad">Sad</option>
-                        <option value="neutral">Neurtral</option>
+                        <option value="neutral">Neutral</option>
                         <option value="happy">Happy</option>
                         <option value="super-happy">Super Happy</option>
                     </select>

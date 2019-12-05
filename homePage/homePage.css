@@ -314,3 +314,11 @@ form input {
   display: flex;
   justify-content: space-between;
 }
+
+.stupidBS {
+  display: none;
+}
+.stupidBS1 {
+  border-color: var(--tile-color);
+  border-style: solid;
+}

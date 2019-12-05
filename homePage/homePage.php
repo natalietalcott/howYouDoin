@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -19,21 +19,8 @@
         // Not logged in :(
         header("Location: ../login/login.php"); /* Redirect browser */
         exit();
-        // echo "Cookie named '" . $cookie_name . "' is not set!";
     } else {
         // Logged In
-        // echo "Cookie '" . $cookie_name . "' is set!<br>";
-        // echo "Value is: " . $_COOKIE[$cookie_name];
-
-        // //send an email
-        // $to = $_COOKIE[$cookie_name];
-        // $subject = "Test Subject";
-        // $msg = "You logged into my website!!\nSuper neat! :))";
-        // // use wordwrap() if lines are longer than 70 characters
-        // // $msg = wordwrap($msg, 70);
-        // $headers = "From: gabbybmeow@gmail.com" . "\r\n"; 
-        // //send email
-        // mail($to, $subject, $msg, $headers);
     }
 
     include('database_connection.php');
@@ -70,7 +57,7 @@
         if (isset($_POST['confirm_password'])) {
             $confirm_password = $_POST['confirm_password'];
         }
-        if (isset($_POST['submit'])) {
+        if (isset($_POST['submitPass'])) {
             if ($password != $confirm_password) {
                 alert("Passwords do NOT match");
             }
@@ -97,180 +84,138 @@
     }
     ?>
 
-    <body id="body">
 
-        <nav>
-            <div class="navbar">
-                <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
-                <!-- <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a> -->
-                <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
-                <a class="filter" id="filter" href="#"><i class="fas fa-users-cog fa-2x"></i></a>
+    <nav>
+        <div class="navbar">
+            <a class="log" id="log" href="#" title="Log Emotion"><i class="far fa-edit fa-2x"></i></a>
+            <!-- <a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a> -->
+            <!-- <a class="filter" id="filter" href="#"><i class="fa fa-filter fa-2x"></i></a> -->
+            <a class="filter" id="filter" href="#"><i class="fas fa-users-cog fa-2x"></i></a>
 
-            </div>
-        </nav>
-        <header>
-            <div class="title">
-                <h1>How You Doin'?</h1>
-            </div>
-        </header>
-        <div id="log_sidebar" class="sidebar">
-            <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
-            <p class="daily_log">DAILY LOG</p>
-            <div class="sidebar_contents">
-                <?php
-                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                    if (isset($_POST['note'])) {
-                        $note = ($_POST['note']);
-                    }
-                    if (isset($_POST['daily_tag'])) {
-                        $tag = ($_POST['daily_tag']);
-                    }
-                    if (isset($_POST['Emoticon'])) {
-                        $selected_emotion = $_POST['Emoticon'];
-                        //echo($selected_emotion);
-                    }
-                    $date = date("Y-m-d");
-                    //echo($date);
-                    if (isset($_POST['submit'])) {
-                        $query = "INSERT INTO daily_log(email, date, emotion, note, tag)VALUES(?, ?, ?, ?, ?)";
-                        $stmt = $conn->prepare($query);
-                        $stmt->bind_param("sssss", $email, $date, $selected_emotion, $note, $tag);
-                        if ($stmt->execute()) {
-                            echo "New records created successfully";
-                        } else {
-                            echo $stmt->error;
-                        }
-                        $stmt->close();
-                        //extend cookie for activity
-                        // setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
-                    }
-                }
-                ?>
-                <p id="emotion">EMOTION</p>
-                <div class="emoticons">
-                    <?php
-                    echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
-                    echo "<i id='sad' class='far fa-frown fa-2x'></i>";
-                    echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
-                    echo "<i id='happy' class='far fa-smile fa-2x'></i>";
-                    echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                    ?>
-                </div>
-                <form method="POST" action="homePage.php">
-                    <div class="radio_emotions">
-                        <input type="radio" name="Emoticon" value="super-sad" />
-                        <input type="radio" name="Emoticon" value="sad" />
-                        <input type="radio" name="Emoticon" value="neutral" />
-                        <input type="radio" name="Emoticon" value="happy" />
-                        <input type="radio" name="Emoticon" value="super-happy" />
-                    </div>
-                    <p id="note">NOTE</p>
-                    <textarea rows="5" type="text" name="note" class="input_note" value="<?php echo $note; ?>"></textarea><br>
-                    <p id="tag">TAG</p>
-                    <select name="daily_tag">
-                        <option value="weather">Weather</option>
-                        <option value="friends">Friends</option>
-                        <option value="family">Family</option>
-                        <option value="school">School</option>
-                        <option value="work">Work</option>
-                        <option value="drama">Drama</option>
-                        <option value="relationship">Relationship</option>
-                    </select><br><br>
-                    <input type="submit" name="submit" />
-                </form>
-
-            </div>
         </div>
-
-        <div id="filter_sidebar" class="filter_sidebar">
-            <a href="javascript:void(0)" id="fclosebtn" class="fclosebtn">&times;</a>
-            <p class="filter_log">USER SETTINGS</p>
-            <div class="sidebar_contents">
-                <div id="lo">
-                    <p>Want to Log Out??<a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a></p>
-                    
-                </div>
-                <section class="changePwd">
-                    <h2> Change My Password! </h2>
-                    <div id="change">
-                        <form method="post">
-                            <!-- <label for="email" id="email_label">Email</label>
-                            <input id="email" type="email" name="email" placeholder="Email"><br><br> -->
-
-                            <label for="password" id="pass_label">New Password:</label>
-                            <input id="password" type="password" name="password" placeholder="Password"><br><br>
-
-                            <label for="reenter" id="repass_label">Re-enter New Password:</label>
-                            <input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
-
-                            <input id="submit" type="submit" value="Change Password" name="submit"><br><br>
-                        </form>
-                    </div>
-                    <?php
-                    // $_GET['email'] = $email;
-                    // include '../changePassword/changePassword.php';
-
-                    ?>
-                </section>
-            </div>
-            <!-- <p class="filter_log">FILTER LOGS</p>
-            <div class="sidebar_contents">
-                <p id="emotion">EMOTION</p>
-                <div class="emoticons">
-                    
-                    echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
-                    echo "<i id='sad' class='far fa-frown fa-2x'></i>";
-                    echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
-                    echo "<i id='happy' class='far fa-smile fa-2x'></i>";
-                    echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
-                    
-                </div>
-                <form method="POST" action="homePage.php">
-                    <div class="radio_emotions">
-                        <input type="radio" name="Emoticon" value="superSad" />
-                        <input type="radio" name="Emoticon" value="sad" />
-                        <input type="radio" name="Emoticon" value="neutral" />
-                        <input type="radio" name="Emoticon" value="happy" />
-                        <input type="radio" name="Emoticon" value="superHappy" />
-                    </div>
-                    <p id="tag">TAG</p>
-                    <select name="daily_tag">
-                        <option value="weather">Weather</option>
-                        <option value="friends">Friends</option>
-                        <option value="family">Family</option>
-                        <option value="school">School</option>
-                        <option value="work">Work</option>
-                        <option value="drama">Drama</option>
-                        <option value="relationship">Relationship</option>
-                    </select><br><br>
-                    <input type="submit" name="Filter" value="Filter" />
-                </form>
-            </div> -->
+    </nav>
+    <header>
+        <div class="title">
+            <h1>How You Doin'?</h1>
         </div>
-        <article>
+    </header>
+    <div id="log_sidebar" class="sidebar">
+        <a href="javascript:void(0)" id="closebtn" class="closebtn">&times;</a>
+        <p class="daily_log">DAILY LOG</p>
+        <div class="sidebar_contents">
             <?php
-            //get all the calendar dates for this user
-            $logList = array();
-            $query = "SELECT * FROM DAILY_LOG WHERE (email = ?)";
-            $stmt = $conn->prepare($query);
-            $stmt->bind_param("s", $email);
-            if ($stmt->execute()) {
-                $result = $stmt->get_result();
-                while ($row = $result->fetch_array()) {
-                    array_push($logList, $row);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (isset($_POST['note'])) {
+                    $note = ($_POST['note']);
                 }
-                $stmt->close();
-            } else {
-                echo $stmt->error;
+                if (isset($_POST['daily_tag'])) {
+                    $tag = ($_POST['daily_tag']);
+                }
+                if (isset($_POST['Emoticon'])) {
+                    $selected_emotion = $_POST['Emoticon'];
+                    //echo($selected_emotion);
+                }
+                $date = date("Y-m-d");
+                //echo($date);
+                if (isset($_POST['submit'])) {
+                    $query = "INSERT INTO daily_log(email, date, emotion, note, tag)VALUES(?, ?, ?, ?, ?)";
+                    $stmt = $conn->prepare($query);
+                    $stmt->bind_param("sssss", $email, $date, $selected_emotion, $note, $tag);
+                    if ($stmt->execute()) {
+                        echo "New records created successfully";
+                    } else {
+                        echo $stmt->error;
+                    }
+                    $stmt->close();
+                    //extend cookie for activity
+                    // setcookie("loginCredentials", $email, time() + 120, "/"); //expires after 120 seconds
+                }
             }
-            $calendar = new Calendar($logList);
-
-            echo $calendar->show();
-
             ?>
-        </article>
+            <p id="emotion">EMOTION</p>
+            <div class="emoticons">
+                <?php
+                echo "<i id='super_sad' class='far fa-sad-tear fa-2x'></i>";
+                echo "<i id='sad' class='far fa-frown fa-2x'></i>";
+                echo "<i id='neutral' class='far fa-meh fa-2x'></i>";
+                echo "<i id='happy' class='far fa-smile fa-2x'></i>";
+                echo "<i id='super_happy' class='far fa-grin fa-2x'></i>";
+                ?>
+            </div>
 
-    </body>
+            <form method="POST" action="homePage.php">
+                <div class="radio_emotions">
+                    <input type="radio" name="Emoticon" value="super-sad" />
+                    <input type="radio" name="Emoticon" value="sad" />
+                    <input type="radio" name="Emoticon" value="neutral" />
+                    <input type="radio" name="Emoticon" value="happy" />
+                    <input type="radio" name="Emoticon" value="super-happy" />
+                </div>
+                <p id="note">NOTE</p>
+                <textarea rows="5" type="text" name="note" class="input_note" value="<?php echo $note; ?>"></textarea><br>
+                <p id="tag">TAG</p>
+                <select name="daily_tag">
+                    <option value="weather">Weather</option>
+                    <option value="friends">Friends</option>
+                    <option value="family">Family</option>
+                    <option value="school">School</option>
+                    <option value="work">Work</option>
+                    <option value="drama">Drama</option>
+                    <option value="relationship">Relationship</option>
+                </select><br><br>
+                <input type="submit" name="submit" />
+            </form>
+
+        </div>
+    </div>
+
+    <div id="filter_sidebar" class="filter_sidebar">
+        <a href="javascript:void(0)" id="fclosebtn" class="fclosebtn">&times;</a>
+        <p class="filter_log">USER SETTINGS</p>
+        <div class="sidebar_contents">
+            <div id="lo">
+                <p>Want to Log Out??<a class="logout" id="logout" href="../login/login.php" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a></p>
+
+            </div>
+            <section class="changePwd">
+                <h2> Change My Password! </h2>
+                <div id="change">
+                    <form method="post">
+                        <label for="password" id="pass_label">New Password:</label>
+                        <input id="password" type="password" name="password" placeholder="Password"><br><br>
+
+                        <label for="reenter" id="repass_label">Re-enter New Password:</label>
+                        <input id="reenter" type="password" name="confirm_password" placeholder="Confirm New Password"><br><br>
+
+                        <input id="submit" type="submit" value="Change Password" name="submitPass"><br><br>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </div>
+    <article>
+        <?php
+        //get all the calendar dates for this user
+        $logList = array();
+        $query = "SELECT * FROM DAILY_LOG WHERE (email = ?)";
+        $stmt = $conn->prepare($query);
+        $stmt->bind_param("s", $email);
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+            while ($row = $result->fetch_array()) {
+                array_push($logList, $row);
+            }
+            $stmt->close();
+        } else {
+            echo $stmt->error;
+        }
+        $calendar = new Calendar($logList);
+
+        echo $calendar->show();
+        ?>
+    </article>
+
+</body>
 
 
 </html>

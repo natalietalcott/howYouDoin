@@ -12,6 +12,7 @@
 
 body {
   height: 100%;
+  background-image: url(../images/howudoin.gif);
   color: var(--top-text);
   font-family: Helvetica, "Times New Roman", Times, serif;
 }
